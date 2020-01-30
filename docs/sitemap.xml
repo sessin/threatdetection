@@ -11,23 +11,19 @@
   </url>
   
   <url>
-    <loc>/attack/_module1.html</loc>
-  </url>
-  
-  <url>
     <loc>/module.html</loc>
   </url>
   
   <url>
-    <loc>/attack/_module2.html</loc>
-  </url>
-  
-  <url>
-    <loc>/mitigation/_module1.html</loc>
+    <loc>/attack/_module1.html</loc>
   </url>
   
   <url>
     <loc>/pre/_module1.html</loc>
+  </url>
+  
+  <url>
+    <loc>/mitigation/_module1.html</loc>
   </url>
   
   <url>
@@ -40,16 +36,8 @@
   </url>
   
   <url>
-    <loc>/attack/_module3.html</loc>
-  </url>
-  
-  <url>
     <loc>/attack.html</loc>
     <lastmod>2019-10-15T15:09:31+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/pre/_module2.html</loc>
   </url>
   
   <url>
@@ -57,20 +45,12 @@
   </url>
   
   <url>
+    <loc>/pre/_module2.html</loc>
+  </url>
+  
+  <url>
     <loc>/mitigation.html</loc>
     <lastmod>2019-10-15T15:09:31+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/pre/_module3.html</loc>
-  </url>
-  
-  <url>
-    <loc>/mitigation/_module4.html</loc>
-  </url>
-  
-  <url>
-    <loc>/mitigation/_module5.html</loc>
   </url>
   
   <url>

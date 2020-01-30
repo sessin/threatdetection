@@ -472,7 +472,7 @@ blockquote {
 }
 blockquote p {
     font-size: 1.1rem;
-    color: #999;
+    color: black;
 }
 blockquote cite {
     display: block;
@@ -704,7 +704,7 @@ table {
     table-layout: auto;
 }
 th {
-    background: #f7f7f7;
+    background: #332a2a;
     padding: 0.5rem;
 }
 td {

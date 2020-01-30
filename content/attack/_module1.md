@@ -13,7 +13,7 @@ pre = "<b>2.1 </b>"
 2.	위협 탐지 및 확인 - 25 분
 
 {{% notice info %}}
-CloudFormation 을 실행하기 전에 CloudFormation Code 를 확인하고 싶으시면 [여기]()를 클릭하시면 됩니다..
+CloudFormation 을 실행하기 전에 CloudFormation Code 를 확인하고 싶으시면 [여기](https://github.com/sessin/threatdetection/blob/master/cloudformation/02-attack-simulation.yml)를 클릭하시면 됩니다..
 {{% /notice %}}
 
 
