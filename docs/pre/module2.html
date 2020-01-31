@@ -14,7 +14,7 @@
   <link rel="shortcut icon" href="https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico" type="image/ico" />
 <link rel="icon" href="https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico" type="image/ico" />
 
-  <title>실습 안내 :: AWS Treat Detection Workshop</title>
+  <title>환경 구성 및 설정 :: AWS Treat Detection Workshop</title>
 
   
   <link href="../css/nucleus.css" rel="stylesheet">
@@ -45,7 +45,7 @@
   
 </head>
 
-<body class="" data-url="/pre/_module1.html">
+<body class="" data-url="/pre/module2.html">
   <nav id="sidebar" class="">
 
 
@@ -136,8 +136,8 @@
  
   
     
-      <li data-nav-id="/pre/_module1.html" title="실습 안내" class="dd-item active">
-        <a href="../pre/_module1.html">
+      <li data-nav-id="/pre/module1.html" title="실습 안내" class="dd-item ">
+        <a href="../pre/module1.html">
         <b>1.1 </b>실습 안내
         
         </a>
@@ -155,8 +155,8 @@
  
   
     
-      <li data-nav-id="/pre/_module2.html" title="환경 구성 및 설정" class="dd-item ">
-        <a href="../pre/_module2.html">
+      <li data-nav-id="/pre/module2.html" title="환경 구성 및 설정" class="dd-item active">
+        <a href="../pre/module2.html">
         <b>1.2 </b>환경 구성 및 설정
         
         </a>
@@ -428,7 +428,7 @@
           
           
           
-          <a href='../'>AWS Threat Detection LAB</a> > <a href='../pre.html'>실습 개요</a> > 실습 안내
+          <a href='../'>AWS Threat Detection LAB</a> > <a href='../pre.html'>실습 개요</a> > 환경 구성 및 설정
           
           
           
@@ -440,7 +440,25 @@
           
           <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#소요-시간">소요 시간</a></li>
+<li><a href="#1-cloudformation-템플릿-실행">1. CloudFormation 템플릿 실행</a></li>
+<li><a href="#2-sns-구독-확인">2. SNS 구독 확인</a></li>
+<li><a href="#3-cloudwatch-이벤트-규칙-설정">3. CloudWatch 이벤트 규칙 설정</a></li>
+<li><a href="#3-보안-서비스-활성화">3. 보안 서비스 활성화</a>
+<ul>
+<li><a href="#1-amazon-guardduty-활성화">1. Amazon GuardDuty 활성화</a></li>
+<li><a href="#2-aws-security-hub-활성화">2. AWS Security Hub 활성화</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -451,61 +469,161 @@
 
       
         <div id="body-inner">
-          <h1>실습 안내</h1>
+          <h1>환경 구성 및 설정</h1>
           
           
+
+
 
 
 <hr />
 
 <blockquote>
-<p>AWS 는 여러분들의 클라우드 운영환경에서 발생할 수 있는 다양한 침해 사고와 보안 위협을 탐지하고 분석할 수 있는 다양한 서비스와 도구들을 제공하고 있습니다. 대표적으로 Amazon GuardDuty 와 Macie, Inspector 와 같은 서비스를 사용하시면 AWS 운영환경에서 발생할 수 있는 인스턴스의 침해나 AWS 계정의 침해 등을 탐지할 수 있으며 여러분들이 사용하시는 EC2 인스턴스의 보안 환경을 좀 더 안전하게 운영하실 수 있습니다. 또한, 이와 같은 AWS 보안 서비스를 다수의 계정 운영 환경에서 보다 효율적으로 모니터링하고 대응할 수 있도록 Security Hub 라는 서비스를 함께 제공하고 있습니다. Security Hub 는 AWS 에서 제공하는 보안 서비스 뿐만 아니라 여러분들이 사용하시는 3rd Party 보안 제품과의 통합도 지원하고 있으므로 다양한 보안 솔루션을 운영하는 환경이라면 더욱 더 효율적인 보안 서비스 통합 환경을 구성하실 수 있습니다.</p>
+<p>이제 본격적으로 앞으로 진행할 실습의 초기 환경을 구성하게 됩니다. 여러분들은 앞으로 실습에 필요한 AWS 리소스를 자동으로 생성해 주는 2개의 CloudFormation템플릿을 실행하게 되며, 나머지 추가작업들은 본 가이드의 지침에 따라 직접 수행하게 될 것입니다.</p>
 </blockquote>
 
+<h3 id="소요-시간">소요 시간</h3>
 
-<div class="notices note" ><p>본 실습은 오레곤 리전(Oregon, us-wast-2)에서 진행됩니다.</p>
+<ol>
+<li>첫번째 CloudFormation 템플릿의 내용을 살펴보고 실행하기 – 5 분</li>
+<li>SNS 구독 확인 - 1 분</li>
+<li>CloudWatch Rule 생성 - 5분</li>
+<li>탐지 기능 활성화 – 5 분</li>
+</ol>
+
+
+<div class="notices info" ><p>본 실습의 모든 과정은 오레곤 리전에서 이루어집니다. 원활한 실습 진행을 위해서 반드시 서울 리전이 선택되었는지를 확인하시기 바랍니다.</p>
 </div>
 
-
-<p>
-<div class="notices warning" ><p>본 실습에서 사용된 CloudFormation 템플릿들은 실습에서 진행되는 환경을 위해 특별히 제작된 것으로, 운영환경에서 실행하지 않도록 주의합니다.</p>
-</div>
-
-• 본 실습에 사용될 AWS 서비스들은 다음과 같습니다. 각 서비스에 대한 자세한 내용은 서비스 이름에 걸린 링크를 클릭하시기 바랍니다.</p>
 
 <hr />
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/guardduty/" target="_blank">Amazon GuardDuty</a>는 AWS 계정과 워크로드를 보호하기 위한 지능형 위협 탐지 및 지속적인 모니터링 서비스입니다.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/inspector/" target="_blank">Amazon Inspector</a>는 AWS상에서 운영되는 고객 애플리케이션 환경에 대해 보안과 규정 준수 수준을 향상시키기 위한 자동화된 보안 수준 점검 기능을 제공합니다.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/cloudwatch/" target="_blank">Amazon CloudWatch</a>는 AWS 리소스와 AWS상의 고객 애플리케이션들을 모니터링하기 위해 메트릭 수집, 로그 파일 모니터링, 경보 설정, 변경에 대한 자동화된 대응 등의 기능을 제공합니다.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/cloudtrail/" target="_blank">AWS CloudTrail</a>은 AWS 어카운트의 거버넌스, 컴플라이언스, 운영 및 리스크 감사 기능을 제공합니다.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/config/" target="_blank">AWS Config</a>는 AWS 리소스의 구성을 측정, 감사 및 평가하게 해주는 일종의 자산관리 기능을 제공하는 서비스입니다<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/lambda/?nc2=h_m1" target="_blank">AWS Lambda</a> 를 사용하면 서버를 프로비저닝하거나 관리할 필요 없이 코드를 실행할 수 있습니다. 사용한 컴퓨팅 시간만큼만 비용을 지불하고, 코드가 실행되지 않을 때는 요금이 부과되지 않습니다.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/cloudformation/?nc2=h_m1" target="_blank">AWS CloudFormation</a> 은 클라우드 환경 내 모든 인프라 리소스를 설명하고 프로비저닝할 수 있도록 공통 언어를 제공합니다.   CloudFormation을 사용하면 간단한 텍스트 파일을 사용하여 자동화되고 안전한 방식으로 모든 리전과 계정에 걸쳐 애플리케이션에 필요한 모든 리소스를 모델링 및 프로비저닝할 수 있습니다.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/iam/?nc2=h_m1" target="_blank">AWS IAM(Identity and Access Management)</a> 를 사용하면 AWS 서비스와 리소스에 대한 액세스를 안전하게 관리할 수 있습니다. 또한, AWS 사용자 및 그룹을 만들고 관리하며, 권한을 사용해 AWS 리소스에 대한 액세스를 허용 및 거부할 수 있습니다.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/vpc/?nc2=h_m1" target="_blank">Amazon VPC(Virtual Private Cloud)</a> 는 AWS 클라우드에서 논리적으로 격리된 공간을 프로비저닝하여 고객이 정의하는 가상 네트워크에서 AWS 리소스를 시작할 수 있게 해줍니다.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/s3/?nc2=h_m1" target="_blank">Amazon S3</a> 는 웹 사이트에서 모바일 앱, 기업 애플리케이션, IoT 센서나 디바이스의 데이터에 이르기까지 어디서나 원하는 양의 데이터를 저장하고 검색할 수 있도록 구축된 객체 스토리지입니다.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/sns/?nc2=h_m1" target="_blank">Amazon SNS(Simple Notification Service)</a> 는 유연한 완전 관리형 게시/구독 메시징 및 모바일 알림 서비스로서, 구독하고 있는 엔드포인트 및 클라이언트로 메시지를 전달하는 작업을 조정합니다.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/systems-manager/?nc2=h_m1" target="_blank">AWS System Manager</a> 는 AWS 인프라에 대한 가시성과 제어를 제공합니다. Systems Manager는 통합된 사용자 인터페이스를 제공하므로 여러 AWS 서비스의 운영 데이터를 보고 AWS 리소스 전체에서 운영 작업을 자동화할 수 있습니다.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="https://aws.amazon.com/ko/security-hub/?nc1=h_ls" target="_blank">AWS SecurityHub</a> 는 멀티 어카운트 환경에서 주요 보안 경보 및 규정 준수 상태에 대한 광범위하고 통합적인 뷰를 제공합니다.  GuardDuty, Inspector, Macie 같은 AWS 보안 서비스뿐만 아니라 다른 파트너 제품과의 연동도 지원하며 각 서비스들이 탐지한 내역들에 대한 요약 및 통합 대쉬보드를 통해 상시 감사체계를 구축할 수 있도록 해줍니다.</p>
+<h3 id="1-cloudformation-템플릿-실행">1. CloudFormation 템플릿 실행</h3>
 
-<blockquote>
 
-<a  class="btn btn-default">
-  
-  
-  
-    
-  <i class="fas fa-asterisk"></i>
-    
-  
-  아래는 이번 실습에 사용되는 서비스 간 아키텍쳐입니다.
-  
-</a>
+<div class="notices info" ><p>CloudFormation은 템플릿 파일 (json, yml)에 EC2 인스턴스, 네트워크 구성 등의 클라우드 인프라 리소스를 모델링하고 클라우드 환경에서 프로비저닝할 수 있는 서비스입니다.</p>
+</div>
 
-</blockquote>
 
-<p><img src="../images/architecture.png" alt="Architecture" /></p>
+
+<div class="notices info" ><p>CloudFormation 을 실행하기 전에 CloudFormation Code 를 확인하고 싶으시면 <a href="https://github.com/sessin/threatdetection/blob/master/cloudformation/01-environment-setup.yml" target="_blank">여기</a>를 클릭하시면 됩니다..</p>
+</div>
+
+
+<ol>
+<li><p>CloudFormation 템플릿을 실행하기 위해 <a href="https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=ThreatDetectionWksp-Env-Setup&amp;templateURL=https://do-not-delete-eunsshin-workshop.s3.ap-northeast-2.amazonaws.com/threatdetection/01-environment-setup.yml" target="_blank">Deploy to AWS 링크</a>를 클릭합니다.</p>
+
+<table>
+<thead>
+<tr>
+<th>Region</th>
+<th>Deploy</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Oregon</td>
+<td><a href="https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=ThreatDetectionWksp-Env-Setup&amp;templateURL=https://do-not-delete-eunsshin-workshop.s3.ap-northeast-2.amazonaws.com/threatdetection/01-environment-setup.yml" target="_blank"><img src="../images/deploy-to-aws.png" alt="Deploy to AWS" /></a></td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>&ldquo;Deploy to AWS&rdquo; 를 클릭하면 브라우져에서 새로운 창이나 새로운 탭이 열리면서 CloudFormation 을 실행할 수 있는 AWS Console 화면으로 자동 접속되게 됩니다.
+<img src="../images/cloudformation_start.png" alt="CloudFormation" /></p></li>
+
+<li><p>아래의 &ldquo;스택 세부 정보 지정&rdquo; 설정 화면에서 CloudFormation 스택의 이름을 확인하고(수정하셔도 됩니다.) &ldquo;Email Address&rdquo; 부분에 SNS 알람 이메일을 수신할 메일 주소를 입력하시기 바랍니다.
+<img src="../images/sns_email.png" alt="CloudFormation" />
+
+<div class="notices warning" ><p>E-mail 주소를 입력하지 않고 진행하는 경우 스택 생성 시작 후 에러와 함께 스택 생성이 진행되지 않으므로 반드시 E-mail 주소를 입력하시기 바랍니다.</p>
+</div>
+
+다음 단계 진행을 위하여 화면 하단의 &ldquo;다음&rdquo; 버튼을 클릭하여 상세 설정 화면으로 이동합니다.</p></li>
+
+<li><p>&ldquo;스택 생성&rdquo; 버튼을 클릭하면 아래와 같은 화면이 나타나게 됩니다. Tag 값을 설정하시려면 원하는 Tag 값을 입력하시고 Tag 가 필요없는 경우 &ldquo;다음&rdquo; 버튼을 클릭합니다.
+<img src="../images/stack_option.png" alt="CloudFormation" /></p></li>
+
+<li><p>다음 화면에서 스택 생성을 위하여 사용된 템플릿의 설정값을 확인한 후 화면 하단에 있는 IAM 리소스 생성 권한 승인 항목을 체크한 후 &ldquo;스택 생성&rdquo; 버튼을 클릭합니다.
+<img src="../images/iam_permission.png" alt="CloudFormation" /></p></li>
+
+<li><p>정상적으로 진행이 되는 경우 아래와 같이 스택의 상태가 &ldquo;CREATE_COMPLETE)으로 되어 있는 것을 확인하실 수 있습니다.
+<img src="../images/create_complete.png" alt="CloudFormation" /></p></li>
+</ol>
+
+<h3 id="2-sns-구독-확인">2. SNS 구독 확인</h3>
+
+<ol>
+<li>이전 단계의 CloudFormation 이 실행되면 여러분들이 등록한 Email 주소로 SNS 토픽에 대한 구독 설정을 하게됩니다. 따라서, 이와 관련한 메일이 여러분들의 Email 주소로 발송되게 되는데 해당 SNS 구독을 확인하기 위하여 아래와 같이 SNS 구독 이메일이 수신되었다면 구독 확인(Confirm Subscription) 링크를 클릭해주시기 바랍니다.
+<img src="../images/confirm_subscription.png" alt="SNS" /></li>
+<li>구독이 정상적으로 완료되면 아래와 같은 페이지로 리다이렉트 되는 것을 확인하실 수 있습니다.
+<img src="../images/confirm_subscription2.png" alt="SNS" />
+
+<div class="notices warning" ><p>이 실습에 사용된 스택은 AWS 보안 서비스의 탐지 기능들을 테스트하기 위하여 교육용으로 작성된 것으로 실제 서비스 환경에서는 사용하시면 안됩니다.</p>
+</div>
+</li>
+</ol>
+
+<h3 id="3-cloudwatch-이벤트-규칙-설정">3. CloudWatch 이벤트 규칙 설정</h3>
+
+<p>조금 전 실행한 CloudFormation 템플릿은 경보 발생을 위한 몇 개의 CloudWatch 이벤트 규칙들을 생성하였습니다. 이 단계에서는 템플릿이 자동으로 생성한 CloudWatch 이벤트 규칙에 추가적으로 하나의 이벤트 규칙을 더 생성하여 탐지 제어에 필요한 이벤트 규칙 생성을 마무리짓도록 하겠습니다. 이 규칙을 생성하고 나면 여러분은 탐지된 위협을 바탕으로 AWS Lambda 함수와 연계된 이메일 알람을 받을 수 있게 됩니다.<br />
+ 아래의 순서에 따라 CloudWatch 이벤트 규칙을 생성하실 수 있으며 보다 자세한 GuardDuty 활용에 관련한 사항은 Amazon GuardDuty 문서에서 참고하실 수 있습니다.</p>
+
+<ol>
+<li>CloudWatch Console 화면에 접속합니다.<br /></li>
+<li>화면 좌측의 &ldquo;이벤트&rdquo; 하단의 &ldquo;규칙&rdquo; 을 클릭합니다.
+<img src="../images/cloudwatch.png" alt="CloudWatch" /></li>
+<li>&ldquo;규칙 생성&rdquo; 버튼을 클릭합니다.
+<img src="../images/cloudwatch_rule1.png" alt="CloudWatch" /></li>
+<li>&ldquo;1단계: 규칙 생성&rdquo; 화면에서 중앙의 &ldquo;서비스별 이벤트와 일치시킬 이벤트 패턴을 생성&rdquo; 메뉴를 클릭한 후 &ldquo;사용자 지정 이벤트 패턴 생성&rdquo; 을 선택합니다.
+<img src="../images/cloudwatch_rule2.png" alt="CloudWatch" /></li>
+
+<li><p>아래의 사용자 지정 이벤트 패턴을 복사한 후 붙여넣기를 합니다.</p>
+
+<pre><code>	{
+	&quot;source&quot;: [
+		&quot;aws.guardduty&quot;
+	],
+	&quot;detail&quot;: {
+		&quot;type&quot;: [
+		&quot;UnauthorizedAccess:EC2/MaliciousIPCaller.Custom&quot;
+		]
+	}
+	}
+</code></pre></li>
+
+<li><p>대상 지정을 위해 &ldquo;대상 추가&rdquo; 를 클릭한 후 &ldquo;Lambda 함수&rdquo; 가 선택된 상태에서 &ldquo;threat-detection-wksp-remediation-nacl&rdquo; 를 선택합니다. 상세 정보 설정을 위하여 &ldquo;세부 정보 구성&rdquo; 버튼을 클릭합니다.
+<img src="../images/cloudwatch_rule3.png" alt="CloudWatch" /></p></li>
+
+<li><p>&ldquo;2단계: 규칙 세부 정보 구성&rdquo; 화면에서 아래와 같이 값을 입력합니다.<br />
+이름 : threat-detection-wksp-guardduty-finding-ec2-maliciousip<br />
+설명 : GuardDuty Finding: UnauthorizedAccess:EC2/MaliciousIPCaller.Custom
+<img src="../images/cloudwatch_rule4.png" alt="CloudWatch" />
+
+<div class="notices info" ><p>여유가 있으시다면 Lambda 화면에 접속하여 CloudFormation 이 생성한 Lambda 함수를 확인한 후 해당 Lambda 함수가 제공하는 기능에 대해 살펴보셔도 좋습니다.</p>
+</div>
+</p></li>
+</ol>
+
+<h3 id="3-보안-서비스-활성화">3. 보안 서비스 활성화</h3>
+
+<h4 id="1-amazon-guardduty-활성화">1. Amazon GuardDuty 활성화</h4>
+
+<p>1.1 GuardDuty 활성화를 위하여 AWS Console 에서 GuardDuty 메뉴로 이동합니다. 아래와 같은 GuardDuty 시작화면에서 &ldquo;시작하기&rdquo; 버튼을 클릭합니다.
+<img src="../images/guardduty1.png" alt="GuardDuty" />
+1.2 다음 화면에서 &ldquo;GuardDuty 활성화&rdquo; 버튼을 클릭합니다.
+<img src="../images/guardduty2.png" alt="GuardDuty" /></p>
+
+<h4 id="2-aws-security-hub-활성화">2. AWS Security Hub 활성화</h4>
+
+<p>2.1 Security Hub 활성화를 위하여 AWS Console 에서 Security Hub 메뉴로 이동합니다. 아래와 같은 Security Hub 시작화면에서 &ldquo;Security Hub로 이동&rdquo; 버튼을 클릭합니다.
+<img src="../images/securityhub1.png" alt="SecurityHub" />
+2.2 다음 화면에서 &ldquo;Security Hub 활성화&rdquo; 버튼을 클릭합니다.
+<img src="../images/securityhub2.png" alt="SecurityHub" /></p>
+
+
+<div class="notices warning" ><p>Security Hub 의 경우 활성화 이전에 발생된 탐지 내역에 대해서는 정보를 제공하지 않습니다. 따라서, 실습이 진행되는 중반 이후에 Security Hub 를 활성화하게 되면 GuardDuty 나 Inspector 가 Security Hub 활성화 시점 전에 탐지한 내역에 대해서는 모니터링이 불가능하므로 반드시 이 단계에서 Security Hub 를 활성화한 후 다음 단계를 진행하시기 바랍니다.</p>
+</div>
+
 
 
 <footer class=" footline" >
@@ -576,7 +694,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -593,8 +710,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -614,6 +729,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -747,10 +865,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="../pre.html" title="실습 개요"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../pre/module1.html" title="실습 안내"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../pre/_module2.html" title="환경 구성 및 설정" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../attack.html" title="공격" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
