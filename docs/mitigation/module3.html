@@ -447,8 +447,13 @@
 <li>
 <ul>
 <li><a href="#소요-시간">소요 시간</a></li>
-<li><a href="#아키텍처-개요">아키텍처 개요</a></li>
-<li><a href="#전체-실습-개요">전체 실습 개요</a></li>
+<li><a href="#전체-실습-리뷰">전체 실습 리뷰</a>
+<ul>
+<li><a href="#1-cloudformation">1. CloudFormation</a></li>
+<li><a href="#2-공격">2. 공격</a></li>
+<li><a href="#3-탐지-및-분석">3. 탐지 및 분석</a></li>
+</ul></li>
+<li><a href="#quick-questions">Quick Questions</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -483,16 +488,42 @@
 <li>질의 응답 - 10 분</li>
 </ol>
 
-<h3 id="아키텍처-개요">아키텍처 개요</h3>
+<hr />
 
-<h3 id="전체-실습-개요">전체 실습 개요</h3>
+<h3 id="전체-실습-리뷰">전체 실습 리뷰</h3>
+
+<h4 id="1-cloudformation">1. CloudFormation</h4>
 
 <ol>
-<li>CloudFormation<br />
-두번째 CloudFormation 을 통해 2개의 EC2 인스턴스가 생성되었었습니다. 1개의 인스턴스는 공격자용도로 생성된 Malicous Host 였으며 다른 하나의 인스턴스는 침해당한 EC2 용도의 Compromized Host 였습니다. 또한, Malicious Host 가 인터넷을 사용하기 위해 사용한 Elastic IP 는 GuardDuty 의 Custom Threat IP 리스트에 등록이 되어 있었던 상태입니다.<br /></li>
+<li>첫번째 CloudFormation 을 통해 탐지 및 분석의 토대가 되는 환경을 구성하였습니다. 또한 준비 과정에서 GuardDuty 와 Security Hub 를 활성화함으로써 위협이나 침입이 발생하였을 경우 탐지할 수 있는 준비를 하였습니다. 두번째 CloudFormation 을 통해 2개의 EC2 인스턴스가 생성되었었습니다. 1개의 인스턴스는 공격자용도로 생성된 Malicous Host 였으며 다른 하나의 인스턴스는 침해당한 EC2 용도의 Compromized Host 였습니다. 또한, Malicious Host 가 인터넷을 사용하기 위해 사용한 Elastic IP 는 GuardDuty 의 Custom Threat IP 리스트에 등록이 되어 있었던 상태입니다.<br /></li>
 <li>AWS 에서는 EC2 인스턴스 생성 시 Key Pair 기반의 SSH 접속 방식을 기본값으로 제공하고 있지만 일부 기업이나 조직의 경우 SSH Key Pair 관리의 불편함 등을 이유로 SSH Key Pair 기반이 아닌 암호 기반 SSH 접속을 수동으로 활성화하여 사용하고 있기도 합니다. 이런 인증 방식의 인스턴스는 Brute Force 공격에 취약하며 이와 같은 공격을 GuardDuty 를 통해 탐지하고 탐지된 정보를 이용해서 Inspector 가 해당 인스턴스를 스캔하도록 구성하였습니다.</li>
-<li></li>
 </ol>
+
+<hr />
+
+<h4 id="2-공격">2. 공격</h4>
+
+<ol>
+<li>공격자의 공격은 BruteForce 공격을 통해 인스턴스가 침해되고 자격증명이 침해되는 것을 가정하여 진행되었습니다.</li>
+</ol>
+
+<hr />
+
+<h4 id="3-탐지-및-분석">3. 탐지 및 분석</h4>
+
+<ol>
+<li>실제 고객이 사용할 수 있는 탐지 및 분석 솔루션은 다양하겠지만 이 실습에서는 GuardDuty 를 통해 1차 위협을 탐지하고 Security Hub 및 Inspector 와 같은 보안 서비스를 통해 좀 더 자동화된 분석 작업을 수행하도록 구성하였습니다.</li>
+<li>탐지된 위협에 대한 분석은 CloudWatch Insight 나 CloudTrail 혹은 ElasticSearch 와 같은 서비스 등을 통하여 수행될 수 있습니다.</li>
+</ol>
+
+<hr />
+
+<h3 id="quick-questions">Quick Questions</h3>
+
+
+<div class="notices info" ><p>정답을 보시려면 &ldquo;&gt;&rdquo; 로 시작하는 질문을 클릭하시면 됩니다.</p>
+</div>
+
 
 
 <div class="expand">
@@ -506,7 +537,39 @@
     	</span>
     </div>
     <div class="expand-content" style="display: none;">
-        IAM Role 에서 사용하는 임시보안자격증명!.
+        IAM Role 에서 사용하는 임시보안자격증명!
+    </div>
+</div>
+
+
+<div class="expand">
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+        <span>
+        
+    	
+    	인스턴스 침해 대응에서 Security Gruop 의 SSH 관련 정책을 삭제하여도 관리자가 외부에서 접근이 가능한 이유는?
+    	
+    	</span>
+    </div>
+    <div class="expand-content" style="display: none;">
+        Systems Manager 의 Session Manager 는 Systems Manager Agent 를 이용하여 SSH 접속 환경을 제공합니다!
+    </div>
+</div>
+
+
+<div class="expand">
+    <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+        <span>
+        
+    	
+    	AWS 의 다양한 보안 솔루션과 3rd 보안 솔루션을 통합하여 모니터링하고 경보를 발생하도록 구성할 수 있는 AWS 서비스는?
+    	
+    	</span>
+    </div>
+    <div class="expand-content" style="display: none;">
+        AWS Security Hub!
     </div>
 </div>
 

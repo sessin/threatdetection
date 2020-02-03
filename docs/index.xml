@@ -66,8 +66,7 @@
       
       <guid>/mitigation/module3.html</guid>
       <description>이번에는 이전 과정을 통해 실행된 공격을 AWS 보안 서비스를 이용하여 탐지하고 분석하는 내용을 다뤄보도록 하겠습니다.
- 소요 시간  리뷰 및 토론 – 10 분 질의 응답 - 10 분  아키텍처 개요 전체 실습 개요  CloudFormation
-두번째 CloudFormation 을 통해 2개의 EC2 인스턴스가 생성되었었습니다. 1개의 인스턴스는 공격자용도로 생성된 Malicous Host 였으며 다른 하나의 인스턴스는 침해당한 EC2 용도의 Compromized Host 였습니다. 또한, Malicious Host 가 인터넷을 사용하기 위해 사용한 Elastic IP 는 GuardDuty 의 Custom Threat IP 리스트에 등록이 되어 있었던 상태입니다.</description>
+ 소요 시간  리뷰 및 토론 – 10 분 질의 응답 - 10 분  전체 실습 리뷰 1. CloudFormation  첫번째 CloudFormation 을 통해 탐지 및 분석의 토대가 되는 환경을 구성하였습니다. 또한 준비 과정에서 GuardDuty 와 Security Hub 를 활성화함으로써 위협이나 침입이 발생하였을 경우 탐지할 수 있는 준비를 하였습니다. 두번째 CloudFormation 을 통해 2개의 EC2 인스턴스가 생성되었었습니다.</description>
     </item>
     
     <item>
