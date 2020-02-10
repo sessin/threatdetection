@@ -17,7 +17,7 @@ pre = "<b>3.2 </b>"
  이 과정에서의 분석은 GuardDuty 에 직접 접속해서 수행할 수도 있지만 Security Hub 를 이용한 통합 분석을 경험하는데 그 목적이 있습니다.
 {{% /notice %}}
 
-1. [AWS Security Hub Console](https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/findings) 에 접속합니다.  
+1. [AWS Security Hub Console](https://ap-northeast-2.console.aws.amazon.com/securityhub/home?region=ap-northeast-2#/findings) 에 접속합니다.  
 2. 좌측의 "분석 결과" 메뉴를 클릭합니다.(위 링크를 클릭한 경우 "분석 결과" 메뉴로 자동접속 됩니다.)
 ![SecurityHub](/images/securityhub_detect1.png)  
 3. 검색창의 "필터 추가" 부분을 클릭한 후 "제품 이름" 을 선택한 후 입력창에 "GuardDuty" 를 입력하고 "Apply" 버튼을 클릭합니다.
@@ -34,7 +34,7 @@ pre = "<b>3.2 </b>"
 
  자동화된 위협 대응은 여러가지 업무들을 가능하게 합니다. 예를 들어 보안 팀에서 특정 위협이 발생하였을 경우 수작업을 통해 진행하였어야하는 다양한 위협 탐지 관련 정보 수집 작업 등이 대표적일 수 있습니다. 간단한 방법의 하나로, GuardDuty 에서 특정 공격을 탐지했을 경우 CloudWatch 이벤트 규칙을 이용해서 EC2 인스턴스에 설치되어 있는 Inspector 에이전트를 통해 해당 공격과 관련되어 있는 정보들을 탐색하도록 구성할 수 있습니다. 이 실습에서는 Inspector 에서 발견한 사항들을 Security Hub 에서 모니터링 및 관리하는 내용을 살펴보도록 하겠습니다. 우리는 EC2 인스턴스의 SSH 관련 설정이 모범 사례를 따르고 있는지를 확인할 예정입니다.
 
-1. [AWS Security Hub Console](https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/findings) 에 접속합니다.  
+1. [AWS Security Hub Console](https://ap-northeast-2.console.aws.amazon.com/securityhub/home?region=ap-northeast-2#/findings) 에 접속합니다.  
 2. 좌측의 "분석 결과" 메뉴를 클릭합니다.(위 링크를 클릭한 경우 "분석 결과" 메뉴로 자동접속 됩니다.)
 ![SecurityHub](/images/securityhub_detect1.png)  
 3. 검색창의 "필터 추가" 부분을 클릭한 후 "제품 이름" 을 선택한 후 입력창에 "Inspector" 를 입력하고 "Apply" 버튼을 클릭합니다.
@@ -53,7 +53,7 @@ pre = "<b>3.2 </b>"
 #### 공격자가 EC2 인스턴스에 접속이 가능했었는지 확인(CloudWatch Logs)
 
 
-1. [AWS CloudWatch Console](https://us-west-2.console.aws.amazon.com/cloudwatch/home?region=us-west-2#logs:) 에 접속합니다.  
+1. [AWS CloudWatch Console](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logs:) 에 접속합니다.  
 2. 좌측의 "로그 그룹" 메뉴를 클릭합니다.(위 링크를 클릭한 경우 "로그 그룹" 메뉴로 자동접속 됩니다.)
 ![CloudWatch](/images/cloudwatch1.png)  
 3. `/threat-detection-wksp/var/log/secure` 로그 그룹을 선택합니다.
@@ -81,7 +81,7 @@ pre = "<b>3.2 </b>"
  {{% /notice %}}
 
 #### EC2 보안 그룹 설정 변경
-1. [AWS EC2 Console](https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#Instances:sort=instanceId) 에 접속합니다.  
+1. [AWS EC2 Console](https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#Instances:sort=instanceId) 에 접속합니다.  
 2. threat-detection-wksp: Compromised Instance 라는 이름의 EC2 인스턴스를 선택합니다.
 ![SecurityGroup](/images/securitygroup1.png)  
 3. 화면 하단의 "설명" 탭에서 해당 인스턴스가 사용중인 보안그룹을 선택합니다.

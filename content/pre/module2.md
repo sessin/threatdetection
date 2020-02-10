@@ -27,11 +27,11 @@ CloudFormation은 템플릿 파일 (json, yml)에 EC2 인스턴스, 네트워크
 CloudFormation 을 실행하기 전에 CloudFormation Code 를 확인하고 싶으시면 [여기](https://github.com/sessin/threatdetection/blob/master/cloudformation/01-environment-setup.yml)를 클릭하시면 됩니다..
 {{% /notice %}}
 
-1. CloudFormation 템플릿을 실행하기 위해 [Deploy to AWS 링크](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=ThreatDetectionWksp-Env-Setup&templateURL=https://do-not-delete-eunsshin-workshop.s3.ap-northeast-2.amazonaws.com/threatdetection/01-environment-setup.yml)를 클릭합니다.  
+1. CloudFormation 템플릿을 실행하기 위해 [Deploy to AWS 링크](https://ap-northeast-2.console.aws.amazon.com/cloudformation/home?region=ap-northeast-2#/stacks/create/template?stackName=ThreatDetectionWksp-Env-Setup&templateURL=https://do-not-delete-eunsshin-workshop.s3.ap-northeast-2.amazonaws.com/threatdetection/01-environment-setup.yml)를 클릭합니다.  
 
 	|Region|Deploy|
 	|------|-----|
-	|Oregon|[![Deploy to AWS](/images/deploy-to-aws.png)](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=ThreatDetectionWksp-Env-Setup&templateURL=https://do-not-delete-eunsshin-workshop.s3.ap-northeast-2.amazonaws.com/threatdetection/01-environment-setup.yml)|
+	|Oregon|[![Deploy to AWS](/images/deploy-to-aws.png)](https://ap-northeast-2.console.aws.amazon.com/cloudformation/home?region=ap-northeast-2#/stacks/create/template?stackName=ThreatDetectionWksp-Env-Setup&templateURL=https://do-not-delete-eunsshin-workshop.s3.ap-northeast-2.amazonaws.com/threatdetection/01-environment-setup.yml)|
 2. "Deploy to AWS" 를 클릭하면 브라우져에서 새로운 창이나 새로운 탭이 열리면서 CloudFormation 을 실행할 수 있는 AWS Console 화면으로 자동 접속되게 됩니다.
 ![CloudFormation](/images/cloudformation_start.png)
 
