@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>탐지 및 분석 on AWS Treat Detection Workshop</title>
+    <link>/mitigation.html</link>
+    <description>Recent content in 탐지 및 분석 on AWS Treat Detection Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Tue, 15 Oct 2019 15:09:31 +0900</lastBuildDate>
+    
+	<atom:link href="/mitigation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>자격증명 침해</title>
+      <link>/mitigation/module1.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/mitigation/module1.html</guid>
+      <description>이번에는 이전 과정을 통해 실행된 공격을 AWS 보안 서비스를 이용하여 탐지하고 분석하는 내용을 다뤄보도록 하겠습니다.
+ 소요 시간  침해된 AWS IAM 자격증명 – 25~40 분 침해된 EC2 Instance - 25~40 분 침해된 S3 버킷 - 15~25 분  이번 실습에서 실행된 공격은 여러분의 설정 실수나 관리 오류로 인하여 공격자가 웹서버의 접근 권한을 획득한 경우를 가정하고 있습니다. 여러분의 자격증명이나 EC2 인스턴스에 대한 접근 권한을 소유하고 있는 공격자가 발생한 다양한 악의적인 행위들은 여러분들이 활성화한 AWS 보안 서비스를 통하여 탐지되게 되며 여러분이 설정하였던 CloudWatch 이벤트 규칙이나 SNS 등을 통하여 경보를 수신할 수 있습니다.</description>
+    </item>
+    
+    <item>
+      <title>인스턴스 침해</title>
+      <link>/mitigation/module2.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/mitigation/module2.html</guid>
+      <description>2 - 침해된 EC2 인스턴스 탐지 및 분석 준비 여러분들은 공격자가 사용하였던 임시보안자격증명을 어떻게 무력화하고 새로운 임시보안자격증명을 발급하여 사용할 수 있는지 학습하였습니다. 이번에는 공격자들이 어떻게 EC2 인스턴스를 침해할 수 있었는지 살펴보도록 하겠습니다. 공격자들은 EC2 인스턴스에 대한 메타데이터 접근 권한이 허용되어 있는 경우 상대적으로 손쉽게 자격증명들을 탈취할 수 있습니다.
+인스터스 ID 와 관련된 탐지 내역 분석 여러분들이 지난 과정에서 침해당한 IAM 자격증명에 대한 내용을 분석하였을 때 여러분들은 탐지 내역에 EC2 인스턴스 ID 정보가 포함된 Principal ID 와 IAM Role 에 대한 정보를 확인할 수 있었습니다.</description>
+    </item>
+    
+    <item>
+      <title>토의</title>
+      <link>/mitigation/module3.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/mitigation/module3.html</guid>
+      <description>이번에는 이전 과정을 통해 실행된 공격을 AWS 보안 서비스를 이용하여 탐지하고 분석하는 내용을 다뤄보도록 하겠습니다.
+ 소요 시간  리뷰 및 토론 – 10 분 질의 응답 - 10 분  전체 실습 리뷰 1. CloudFormation  첫번째 CloudFormation 을 통해 탐지 및 분석의 토대가 되는 환경을 구성하였습니다. 또한 준비 과정에서 GuardDuty 와 Security Hub 를 활성화함으로써 위협이나 침입이 발생하였을 경우 탐지할 수 있는 준비를 하였습니다. 두번째 CloudFormation 을 통해 2개의 EC2 인스턴스가 생성되었었습니다.</description>
+    </item>
+    
+  </channel>
+</rss>
