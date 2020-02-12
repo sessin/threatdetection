@@ -76,7 +76,7 @@
       
       <guid>/pre/module2.html</guid>
       <description>이제 본격적으로 앞으로 진행할 실습의 초기 환경을 구성하게 됩니다. 여러분들은 앞으로 실습에 필요한 AWS 리소스를 자동으로 생성해 주는 2개의 CloudFormation템플릿을 실행하게 되며, 나머지 추가작업들은 본 가이드의 지침에 따라 직접 수행하게 될 것입니다.
- 소요 시간  첫번째 CloudFormation 템플릿의 내용을 살펴보고 실행하기 – 5 분 SNS 구독 확인 - 1 분 CloudWatch Rule 생성 - 5분 탐지 기능 활성화 – 5 분  본 실습의 모든 과정은 오레곤 리전에서 이루어집니다.</description>
+ 소요 시간  첫번째 CloudFormation 템플릿의 내용을 살펴보고 실행하기 – 5 분 SNS 구독 확인 - 1 분 CloudWatch Rule 생성 - 5분 탐지 기능 활성화 – 5 분  본 실습의 모든 과정은 서울 리전에서 이루어집니다.</description>
     </item>
     
   </channel>

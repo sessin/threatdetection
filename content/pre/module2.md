@@ -14,7 +14,7 @@ pre = "<b>1.2 </b>"
 4.	탐지 기능 활성화 – 5 분
 
 {{% notice info %}}
-본 실습의 모든 과정은 오레곤 리전에서 이루어집니다. 원활한 실습 진행을 위해서 반드시 서울 리전이 선택되었는지를 확인하시기 바랍니다.
+본 실습의 모든 과정은 서울 리전에서 이루어집니다. 원활한 실습 진행을 위해서 반드시 서울 리전이 선택되었는지를 확인하시기 바랍니다.
 {{% /notice %}}
 * * * 
 ### 1. CloudFormation 템플릿 실행
@@ -31,7 +31,7 @@ CloudFormation 을 실행하기 전에 CloudFormation Code 를 확인하고 싶�
 
 	|Region|Deploy|
 	|------|-----|
-	|Oregon|[![Deploy to AWS](/images/deploy-to-aws.png)](https://ap-northeast-2.console.aws.amazon.com/cloudformation/home?region=ap-northeast-2#/stacks/create/template?stackName=ThreatDetectionWksp-Env-Setup&templateURL=https://do-not-delete-eunsshin-workshop.s3.ap-northeast-2.amazonaws.com/threatdetection/01-environment-setup.yml)|
+	|Seoul|[![Deploy to AWS](/images/deploy-to-aws.png)](https://ap-northeast-2.console.aws.amazon.com/cloudformation/home?region=ap-northeast-2#/stacks/create/template?stackName=ThreatDetectionWksp-Env-Setup&templateURL=https://do-not-delete-eunsshin-workshop.s3.ap-northeast-2.amazonaws.com/threatdetection/01-environment-setup.yml)|
 2. "Deploy to AWS" 를 클릭하면 브라우져에서 새로운 창이나 새로운 탭이 열리면서 CloudFormation 을 실행할 수 있는 AWS Console 화면으로 자동 접속되게 됩니다.
 ![CloudFormation](/images/cloudformation_start.png)
 

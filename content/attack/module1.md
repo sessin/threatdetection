@@ -22,7 +22,7 @@ CloudFormation 을 실행하기 전에 CloudFormation Code 를 확인하고 싶�
 
     |Region|Deploy|
     |------|-----|
-    |Oregon|[![Deploy to AWS](/images/deploy-to-aws.png)](https://ap-northeast-2.console.aws.amazon.com/cloudformation/home?region=ap-northeast-2#/stacks/create/template?stackName=ThreatDetectionWksp-Attack&templateURL=https://do-not-delete-eunsshin-workshop.s3.ap-northeast-2.amazonaws.com/threatdetection/02-attack-simulation.yml)|
+    |Seoul|[![Deploy to AWS](/images/deploy-to-aws.png)](https://ap-northeast-2.console.aws.amazon.com/cloudformation/home?region=ap-northeast-2#/stacks/create/template?stackName=ThreatDetectionWksp-Attack&templateURL=https://do-not-delete-eunsshin-workshop.s3.ap-northeast-2.amazonaws.com/threatdetection/02-attack-simulation.yml)|
 
 2. "Deploy to AWS" 를 클릭하면 브라우져에서 새로운 창이나 새로운 탭이 열리면서 CloudFormation 을 실행할 수 있는 AWS Console 화면으로 자동 접속되게 됩니다.
 ![CloudFormation](/images/attack_formation1.png)
