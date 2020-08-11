@@ -490,7 +490,6 @@
 <ol>
 <li>침해된 AWS IAM 자격증명 – 25~40 분</li>
 <li>침해된 EC2 Instance - 25~40 분</li>
-<li>침해된 S3 버킷 - 15~25 분</li>
 </ol>
 
 <p>이번 실습에서 실행된 공격은 여러분의 설정 실수나 관리 오류로 인하여 공격자가 웹서버의 접근 권한을 획득한 경우를 가정하고 있습니다. 여러분의 자격증명이나 EC2 인스턴스에 대한 접근 권한을 소유하고 있는 공격자가 발생한 다양한 악의적인 행위들은 여러분들이 활성화한 AWS 보안 서비스를 통하여 탐지되게 되며 여러분이 설정하였던 CloudWatch 이벤트 규칙이나 SNS 등을 통하여 경보를 수신할 수 있습니다.이런 경보들은 의심스러운 IP 주소와의 통신, 계정 정보 탈취를 위한 정찰활동, S3 버킷의 설정 변경등과 같은 내용을 담고 있습니다. 여러분들은 이러한 경보나 로그 등을 통하여 여러분들의 AWS 환경에 침입을 시도하는 침입자들의 접근 시도를 파악하고 해당 시도 차단을 위한 적절한 조치를 수행하여야하며 잘못된 설정이 있다면 해당 설정을 적절하여 수정하여 보다 안전한 AWS 운영환경을 구성하셔야 합니다.</p>
@@ -513,13 +512,13 @@
 </div>
 </p></li>
 
-<li><p>메일 본문에 있는 <Access Key ID> 를 복사합니다.
+<li><p>메일 본문에 있는 Access Key ID 를 복사합니다.
 <img src="../images/finding1.png" alt="Detect" /></p></li>
 </ol>
 
 <h4 id="guardduty-에서-해당-access-key-와-관련되어-있는-탐지-내역-분류">GuardDuty 에서 해당 Access Key 와 관련되어 있는 탐지 내역 분류</h4>
 
-<p>여러분들은 GuardDuty 에서 무엇인가를 탐지하여 경보를 발송했다는 것을 알게되었습니다. 이제 여러분들은 해당 경보와 관련한 보다 자세한 사항을 확인하기 위하여 GuardDuty 에 접속한 후 탐지되어 있ㅇ는 다양한 내역 중에서 해당 Access Key 와 관련된 내역만을 선별적으로 분류하는 작업을 하도록 하겠습니다.</p>
+<p>여러분들은 GuardDuty 에서 무엇인가를 탐지하여 경보를 발송했다는 것을 알게되었습니다. 이제 여러분들은 해당 경보와 관련한 보다 자세한 사항을 확인하기 위하여 GuardDuty 에 접속한 후 탐지되어 있는 다양한 내역 중에서 해당 Access Key 와 관련된 내역만을 선별적으로 분류하는 작업을 하도록 하겠습니다.</p>
 
 <ol>
 <li>GuardDuty Console 화면으로 접속합니다.<br /></li>
@@ -529,23 +528,25 @@
 <img src="../images/finding3.png" alt="Detect" /><br /></li>
 <li>필터를 적용한 후 아래와 같이 특정 액세스 키와 관련한 탐지 내역만 별도로 필터링 되어 나타나는 것을 확인합니다. 각각의 탐지 내역을 클릭하여 상세 내역을 확인하도록 합니다.
 <img src="../images/finding4.png" alt="Detect" /><br /></li>
-<li>탐지 상세 내역 정보 중 &ldquo;해당 리소스&rdquo; 부분에서 &ldquo;User Type&rdquo; 정보를 확인합니다.
+
+<li><p>탐지 상세 내역 정보 중 &ldquo;해당 리소스&rdquo; 부분에서 &ldquo;Iam Instance profile&rdquo; 정보를 확인합니다.
 <img src="../images/finding5.png" alt="Detect" /><br />
 
-<div class="notices tip" ><p>User Type 이 &ldquo;AssumedRole&rdquo; 로 되어 있는데 이것은 무엇을 의미할까요? 침해 유형을 분석할 때 User Type 을 확인하고 해당 Type 을 기반으로해서 분석과 대응 방안을 수립하는 것은 아주 중요합니다.</p>
+<div class="notices tip" ><p>Iam Instance profile 의 내용 중 첫번째 라인에 있는 ARN 정보는 무엇을 의미하는 것일까요? 침해 유형을 분석할 때 IAM 권한을 갖는 사용자 혹은 역할을 확인하고 해당 IAM 자격증명 타입을 기반으로해서 분석과 대응 방안을 수립하는 것은 아주 중요합니다. 이 값은 EC2 인스턴스에 할당되어 있던 IAM Role 의 이름으로 실제로 API 호출에 사용된 IAM Role 의 이름입니다.</p>
 </div>
-</li>
-<li>탐지 상세 내역 정보 중 &ldquo;해당 리소스&rdquo; 부분에서 &ldquo;Principal ID&rdquo; 정보를 확인합니다.
-<img src="../images/finding6.png" alt="Detect" /><br />
 
-<div class="notices info" ><p>Principal ID 부분의 정보는 콜론(:)으로 구분되어 있는 IAM Role 에 대한 고유값과 EC2 Instance ID 의 값의 형태입니다.<br />
-  예) AROA4M5UW2CWQQ6NXGLUI:i-0cd129013ab8d13cd<br />
+&ldquo;Iam Instance profile&rdquo; 의 내용 중 첫번째 줄에 있는 ARN 정보 줌 &ldquo;-profile&rdquo; 을 제외한 값인 &ldquo;threat-detection-wksp-compromised-ec2&rdquo; 은 EC2 인스턴스에 할당되어 있는 IAM Role의 이름을 의미합니다. 이 이름을 다음 과정에서 검색에 사용하기 위하여 메모해두도록 합니다.</p></li>
+
+<li><p>탐지 상세 내역 정보 중 &ldquo;해당 리소스&rdquo; 부분의 &ldquo;Iam Instance profile&rdquo; 정보에서 &ldquo;ID&rdquo; 정보(Principal ID 정보)를 확인합니다.
+<img src="../images/finding5.png" alt="Detect" /><br />
+
+<div class="notices info" ><p>ID 는 IAM 자격증명 별로 할당되는 고유의 값으로 아래와 같은 형태입니다.<br />
+  예) AROA4M5UW2CWQQ6NXGLUI<br />
   Principal ID 는 API 호출에 사용되는 고유값을 포함하고 있습니다. 임시 보안 자격증명을 통해 API 호출이 발생하는 경우 Principal ID 는 session 명도 포함을 하고 있는데 이 탐지 내역의 경우 EC2 에 대한 IAM 역할을 이용해서 호출이 이뤄졌기 때문에 session 명으로 EC2 Instancd ID 가 사용되었습니다.</p>
 </div>
-</li>
-<li>Principal ID 의 값을 복사합니다.</li>
-<li>&ldquo;해당 리소스&rdquo; 부분에서 &ldquo;User Name&rdquo; 을 확인한 후 그 값을 복사합니다. 이 값은 EC2 인스턴스에 할당되어 있던 IAM Role 의 이름으로 실제로 API 호출에 사용된 IAM Role 의 이름입니다.
-<img src="../images/finding7.png" alt="Detect" /><br /></li>
+</p></li>
+
+<li><p>Principal ID 의 값을 복사합니다.</p></li>
 </ol>
 
 <h3 id="대응">대응</h3>
@@ -558,14 +559,14 @@
 <li>AWS IAM Console 로 접속합니다.</li>
 <li>좌측의 메뉴에서 &ldquo;역할&rdquo;을 클릭합니다.
 <img src="../images/respond1.png" alt="Respond" /></li>
-<li>검색창에 조금전 복사해두었던 &ldquo;User Name&rdquo; 값을 붙여넣습니다.
+<li>검색창에 조금전 메모해두었던 &ldquo;IAM 역할&rdquo; 값을 붙여넣습니다.
 <img src="../images/respond2.png" alt="Respond" /></li>
 <li>요약화면에서 &ldquo;세션 취소&rdquo; 탭을 클릭한 후 붉은 버튼으로 되어있는 &ldquo;활성 세션 취소&rdquo; 를 클릭합니다.
 <img src="../images/respond3.png" alt="Respond" />
 확인창이 뜨면 체크박스를 체크한 후 &ldquo;활성 세션 취소&rdquo; 를 클릭합니다.
 <img src="../images/respond4.png" alt="Respond" />
 
-<div class="notices info" ><p>이제 공격자가 최초에 사용하였던 IAM Role 과 관련한 활성 세션은 모두 취소가 되었습니다. 즉, 공격자는 더이상 최초 세션을 이용하여 악의적인 행위를 수행할 수 없습니다. 하지만 새로운 활성 세션은 여전히 만들어 낼 수 있을 것입니다. 그럼 이번에는 무엇을 하여야할까요?</p>
+<div class="notices info" ><p>이제 공격자가 최초에 사용하였던 IAM Role과 관련한 활성 세션은 모두 취소가 되었습니다. 즉, 공격자는 더이상 최초 세션을 이용하여 악의적인 행위를 수행할 수 없습니다. 하지만 새로운 활성 세션은 여전히 만들어 낼 수 있을 것입니다. 그럼 이번에는 무엇을 하여야할까요?</p>
 </div>
 </li>
 </ol>
